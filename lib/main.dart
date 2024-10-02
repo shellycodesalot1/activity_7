@@ -8,6 +8,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.lightBlue,
+      ),
       home: FadingTextAnimation(),
     );
   }
@@ -31,25 +34,48 @@ class _FadingTextAnimationState extends State<FadingTextAnimation> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Fading Text Animation'),
+        title: Text('Sky-Themed Animation'),
+        backgroundColor: Colors.lightBlueAccent,
       ),
-      body: Center(
-        child: GestureDetector(
-          onTap: toggleVisibility,  // Taps will toggle visibility
-          child: AnimatedOpacity(
-            opacity: _isVisible ? 1.0 : 0.0,
-            duration: const Duration(seconds: 1),
-            curve: Curves.easeInOut,  // Adds smooth fading
-            child: const Text(
-              'Hello, Flutter!',
-              style: TextStyle(fontSize: 24),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.lightBlue[100]!, Colors.blueAccent],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: Center(
+          child: GestureDetector(
+            onTap: toggleVisibility,
+            child: AnimatedOpacity(
+              opacity: _isVisible ? 1.0 : 0.0,
+              duration: const Duration(seconds: 2),  // Smooth fade
+              curve: Curves.easeInOut,
+              child: const Text(
+                'Hello, Welcome to Shelly World',
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontFamily: 'Pacifico',  // Sky-themed, fancy font
+                  shadows: [
+                    Shadow(
+                      blurRadius: 10.0,
+                      color: Colors.blueGrey,
+                      offset: Offset(5.0, 5.0),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: toggleVisibility,
-        child: Icon(Icons.play_arrow),
+        backgroundColor: Colors.lightBlueAccent,
+        child: Icon(Icons.cloud),
       ),
     );
   }
